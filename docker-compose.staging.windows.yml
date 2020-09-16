@@ -1,0 +1,67 @@
+version: "3.7"
+
+# Linux Containers on Windows Docker
+# You need to start it with the following CLI command:
+# docker-compose -f docker-compose.yml -f docker-compose.staging.windows.yml up --build -d
+
+services:
+  orleans_stream_test_mysql:
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: cong1046
+      MYSQL_USER: orleans
+      MYSQL_PASSWORD: orleans
+      MYSQL_DATABASE: Orleans
+    ports:
+      - target: 3306
+        published: 3306
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_silo_host_1:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_silo_host_2:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_silo_host_3:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_silo_host_4:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_silo_host_5:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    networks:
+      - orleans-stream-test-net
+
+  orleans_stream_test_api:
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+    ports:
+      - target: 80
+        published: 80
+    networks:
+      - orleans-stream-test-net
+
+networks:
+  orleans-stream-test-net:

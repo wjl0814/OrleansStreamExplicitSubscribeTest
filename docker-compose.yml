@@ -1,0 +1,60 @@
+version: "3.7"
+
+services:
+  orleans_stream_test_mysql:
+    image: mysql/mysql-server:8.0.18-1.1.13
+    container_name: orleans_stream_test_mysql
+
+  orleans_stream_test_silo_host_1:
+    build:
+      context: .
+      dockerfile: SiloHost/Dockerfile
+    container_name: orleans_stream_test_silo_host_1
+    depends_on:
+      - orleans_stream_test_mysql
+
+  orleans_stream_test_silo_host_2:
+    build:
+      context: .
+      dockerfile: SiloHost/Dockerfile
+    container_name: orleans_stream_test_silo_host_2
+    depends_on:
+      - orleans_stream_test_mysql
+
+  orleans_stream_test_silo_host_3:
+    build:
+      context: .
+      dockerfile: SiloHost/Dockerfile
+    container_name: orleans_stream_test_silo_host_3
+    depends_on:
+      - orleans_stream_test_mysql
+
+  orleans_stream_test_silo_host_4:
+    build:
+      context: .
+      dockerfile: SiloHost/Dockerfile
+    container_name: orleans_stream_test_silo_host_4
+    depends_on:
+      - orleans_stream_test_mysql
+
+  orleans_stream_test_silo_host_5:
+    build:
+      context: .
+      dockerfile: SiloHost/Dockerfile
+    container_name: orleans_stream_test_silo_host_5
+    depends_on:
+      - orleans_stream_test_mysql
+
+  orleans_stream_test_api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    container_name: orleans_stream_test_api
+    depends_on:
+      - orleans_stream_test_silo_host_1
+      - orleans_stream_test_silo_host_2
+      - orleans_stream_test_silo_host_3
+      - orleans_stream_test_silo_host_4
+      - orleans_stream_test_silo_host_5
+
+
